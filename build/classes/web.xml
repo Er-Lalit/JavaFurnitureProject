@@ -196,4 +196,34 @@
     <servlet-name>AddToCartController</servlet-name>
     <url-pattern>/AddToCartController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CartController</display-name>
+    <servlet-name>CartController</servlet-name>
+    <servlet-class>control.CartController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CartController</servlet-name>
+    <url-pattern>/CartController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateCart</display-name>
+    <servlet-name>UpdateCart</servlet-name>
+    <servlet-class>control.UpdateCart</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateCart</servlet-name>
+    <url-pattern>/UpdateCart</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RemoveFromCart</display-name>
+    <servlet-name>RemoveFromCart</servlet-name>
+    <servlet-class>control.RemoveFromCart</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RemoveFromCart</servlet-name>
+    <url-pattern>/RemoveFromCart</url-pattern>
+  </servlet-mapping>
 </web-app>

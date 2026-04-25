@@ -1,7 +1,6 @@
 package control;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -10,46 +9,41 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 
-@WebServlet("/add-to-cart")
-public class AddToCartController extends HttpServlet {
+public class RemoveFromCart extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
-    public AddToCartController() {
-        super();
-    }
 
     @SuppressWarnings("unchecked")
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         try {
-            HttpSession session = request.getSession();
+            HttpSession session = request.getSession(false);
+
+            if (session == null) {
+                response.sendRedirect("shop.jsp");
+                return;
+            }
 
             HashMap<Integer, Integer> cart =
                     (HashMap<Integer, Integer>) session.getAttribute("cart");
 
-            if (cart == null) {
-                cart = new HashMap<>();
+            if (cart == null || cart.isEmpty()) {
+                response.sendRedirect("CartController");
+                return;
             }
 
-            int pid = Integer.parseInt(request.getParameter("pid"));
+            int pid = Integer.parseInt(request.getParameter("id"));
 
-            cart.put(pid, cart.getOrDefault(pid, 0) + 1);
+            // remove product
+            cart.remove(pid);
 
             session.setAttribute("cart", cart);
 
-            // redirect back to same page (better UX)
-            String referer = request.getHeader("referer");
-
-            if (referer != null) {
-                response.sendRedirect(referer);
-            } else {
-                response.sendRedirect("shop.jsp");
-            }
+            response.sendRedirect("CartController");
 
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("shop.jsp");
+            response.sendRedirect("CartController");
         }
     }
 }

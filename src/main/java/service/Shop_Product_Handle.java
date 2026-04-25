@@ -123,44 +123,61 @@ public class Shop_Product_Handle implements ShopePageProduct {
 		
 	}
 
-	@Override
-	public List<product> addCart(product p) throws Exception {
-		List<product> plist=new ArrayList<>();
-		try
-		{
-			
-			Connection con=DbConnection.getConnection();
-			if(con==null)
-			{
-				return null;
-			}
-			else
-			{
-				PreparedStatement ps=con.prepareStatement("select * from product where product_id=?");
-				ps.setInt(1,p.getProduct_Id() );
-				ResultSet rs=ps.executeQuery();
-				while(rs.next())
-				{
-					product p1=new product();
-					p1.setProduct_Id(rs.getInt("product_id"));
-					p1.setProduct_Name(rs.getString("product_name"));
-					p1.setProduct_Image(rs.getString("product_image"));
-					p1.setProduct_productPrice(rs.getDouble("product_price"));
-					p1.setProduct_cartCount(1);
-					plist.add(p1);
-					
-				}
-				rs.close();
-				ps.close();
-				con.close();
-			}
-			
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			
-		}
-		return plist;
+	public List<product> getProductsByIds(Set<Integer> ids)throws Exception {
+
+	    List<product> list = new ArrayList<>();
+
+	    if (ids == null || ids.isEmpty()) {
+	        return list;
+	    }
+
+	    try {
+	        Connection con = DbConnection.getConnection();
+
+	        // create ?, ?, ? dynamically
+	        StringBuilder placeholders = new StringBuilder();
+
+	        int size = ids.size();
+	        for (int i = 0; i < size; i++) {
+	            placeholders.append("?");
+	            if (i < size - 1) {
+	                placeholders.append(",");
+	            }
+	        }
+
+	        String sql = "SELECT * FROM product WHERE product_id IN (" + placeholders + ")";
+
+	        PreparedStatement ps = con.prepareStatement(sql);
+
+	        // set values
+	        int index = 1;
+	        for (Integer id : ids) {
+	            ps.setInt(index++, id);
+	        }
+
+	        ResultSet rs = ps.executeQuery();
+
+	        while (rs.next()) {
+
+	            product p = new product();
+
+	            p.setProduct_Id(rs.getInt("product_id"));
+	            p.setProduct_Name(rs.getString("product_name"));
+	            p.setProduct_productPrice(rs.getDouble("product_price"));
+	            p.setProduct_Image(rs.getString("product_image"));
+
+	            list.add(p);
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return list;
 	}
+
+
+	
+
+	
 }

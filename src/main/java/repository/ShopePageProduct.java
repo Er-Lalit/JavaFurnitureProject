@@ -7,6 +7,5 @@ public interface ShopePageProduct {
 	public List<product> getAllProduct()throws Exception;
 	public void editProduct(product p)throws Exception;
 	public void deletProduct(product p)throws Exception;
-	public List<product> addCart(product p)throws Exception;
-
+	public List<product> getProductsByIds(Set<Integer> ids) throws Exception;
 }

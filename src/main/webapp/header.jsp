@@ -63,7 +63,7 @@
                         </ul>
                     </li>
                 <% } %>
-                <li><a class="nav-link" href="cart.jsp"><img src="images/cart.svg"></a></li>
+                <li><a class="nav-link" href="CartController"><img src="images/cart.svg"></a></li>
             </ul>
         </div>
     </div>

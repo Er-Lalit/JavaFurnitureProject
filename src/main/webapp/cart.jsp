@@ -5,9 +5,10 @@
 <%@ page import="model.product" %>
 
 <%
-     List<product> sessionProduct=(List<product>)session.getAttribute("cart");
+List<product> products = (List<product>) request.getAttribute("products");
+HashMap<Integer, Integer> cart = (HashMap<Integer, Integer>) request.getAttribute("cart");
 
-
+double grandTotal = 0;
 %>
 
 <!doctype html>
@@ -16,12 +17,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Fix paths -->
+    <base href="<%= request.getContextPath() %>/">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="<%= request.getContextPath() %>/favicon.png">
+
     <title>Cart | Furni</title>
 
+    <!-- CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="css/tiny-slider.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 </head>
-
 <body>
 
 <!-- HEADER -->
@@ -51,64 +60,67 @@
             </thead>
 
             <tbody>
-               <% 
-               if(sessionProduct!=null)
-               {
-            	   for(product p:sessionProduct)
-            	   {
-            		   
-            	   
-               
-               
-               %>
-                <tr>
-                    <td>
-                        <img src="images/<%=p.getProduct_Image() %>" width="80">
-                    </td>
 
-                    <td><%=p.getProduct_Name() %></td>
+<%
+if (products != null && cart != null && !products.isEmpty()) {
 
-                    <td><%=p.getProduct_productPrice() %></td>
+    for (product p : products) {
 
-                    <td>
-                        <a href="UpdateCart?type=minus&id=PRODUCT_ID">−</a>
-                        <%=p.getProduct_cartCount() %>
-                        <a href="UpdateCart?type=plus&id=PRODUCT_ID">+</a>
-                    </td>
+        int qty = cart.get(p.getProduct_Id());
+        double total = p.getProduct_productPrice() * qty;
+        grandTotal += total;
+%>
 
-                    <td>₹0</td>
+<tr>
+    <td>
+        <img src="images/<%= p.getProduct_Image() %>" width="80">
+    </td>
 
-                    <td>
-                        <a href="RemoveFromCart?id=PRODUCT_ID"
-                           class="btn btn-black btn-sm">
-                           X
-                        </a>
-                    </td>
-                    <%
-            	   }
-               }
-            	
-                    
-                    %>
-                </tr>
-                <!-- END cart row -->
+    <td><%= p.getProduct_Name() %></td>
 
-                <!-- Empty cart message -->
-                <tr>
-                    <td colspan="6" align="center">
-                        <h4>Your cart is empty</h4>
-                        <a href="shop.jsp" class="btn btn-black">
-                            Shop Now
-                        </a>
-                    </td>
-                </tr>
+    <td>₹<%= p.getProduct_productPrice() %></td>
+
+    <td>
+        <a href="UpdateCart?type=minus&id=<%= p.getProduct_Id() %>">−</a>
+        <%= qty %>
+        <a href="UpdateCart?type=plus&id=<%= p.getProduct_Id() %>">+</a>
+    </td>
+
+    <td>₹<%= total %></td>
+
+    <td>
+        <a href="RemoveFromCart?id=<%= p.getProduct_Id() %>"
+           class="btn btn-black btn-sm">
+           X
+        </a>
+    </td>
+</tr>
+
+<%
+    }
+} else {
+%>
+
+<tr>
+    <td colspan="6" align="center">
+        <h4>Your cart is empty</h4>
+        <a href="shop.jsp" class="btn btn-black">
+            Shop Now
+        </a>
+    </td>
+</tr>
+
+<%
+}
+%>
+
             </tbody>
         </table>
 
         <!-- TOTAL SECTION -->
         <div align="right">
-            <h4>Subtotal: ₹0</h4>
-            <h4>Total: ₹0</h4>
+            <h4>Subtotal: ₹<%= grandTotal %></h4>
+            <h4>Total: ₹<%= grandTotal %></h4>
 
             <a href="Checkout" class="btn btn-black btn-lg">
                 Proceed To Checkout
@@ -122,6 +134,7 @@
 <jsp:include page="footer.jsp"/>
 
 <script src="js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 </html>
