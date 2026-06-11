@@ -122,7 +122,7 @@ if (products != null && cart != null && !products.isEmpty()) {
             <h4>Subtotal: ₹<%= grandTotal %></h4>
             <h4>Total: ₹<%= grandTotal %></h4>
 
-            <a href="Checkout" class="btn btn-black btn-lg">
+            <a href="CheckoutController" class="btn btn-black btn-lg">
                 Proceed To Checkout
             </a>
         </div>

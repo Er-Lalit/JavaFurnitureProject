@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ page import="java.util.*" %>
+<%@ page import="model.product" %>   
+<%
+List<product> products = (List<product>) request.getAttribute("products");
+HashMap<Integer, Integer> cart = (HashMap<Integer, Integer>) request.getAttribute("cart");
+double grandTotal=0;
+
+%>
 
 <!doctype html>
 <html lang="en">
@@ -130,45 +139,75 @@
 						<table class="table site-block-order-table mb-5">
 
 							<thead>
+							 <tr>
+							  <th>Product</th>
+							   <th>Quantity</th>
+							    <th>Total</th> </tr>
+							     </thead>
+							      <tbody>
+<%
+if (products != null && cart != null && !products.isEmpty()) {
 
-								<tr>
-									<th>Product</th>
-									<th>Total</th>
-								</tr>
+    for (product p : products) {
 
-							</thead>
+        int qty = cart.get(p.getProduct_Id());
+        double total = p.getProduct_productPrice() * qty;
+        grandTotal+=total;
+%>
+							      <tr>
+							       <td><%=p.getProduct_Name() %></td>
+							        <td><%=qty %></td>
+							         <td><%=total %></td>
+							          </tr>
+<%
+    }
+     
+    %>
+    <tr>
 
-							<tbody>
+    <td colspan="2"
+        class="text-black font-weight-bold">
 
-								<tr>
-									<td>Sofa Chair</td>
-									<td>₹2500</td>
-								</tr>
+        <strong>Order Total</strong>
 
-								<tr>
-									<td>Wooden Table</td>
-									<td>₹1500</td>
-								</tr>
+    </td>
 
-								<tr>
+    <td
+        class="text-black font-weight-bold">
 
-									<td
-										class="text-black font-weight-bold">
+        <strong>
+            ₹<%=grandTotal %>
+        </strong>
 
-										<strong>Order Total</strong>
+    </td>
 
-									</td>
+</tr>
+    <%
+    
+} else {
+%>							         
+<td colspan="3" align="center">
 
-									<td
-										class="text-black font-weight-bold">
+    <h4>No items available for checkout</h4>
 
-										<strong>₹4000</strong>
+    <p>
+        Add products to your cart before proceeding to checkout.
+    </p>
 
-									</td>
 
-								</tr>
+    <a href="shop.jsp"
+       class="btn btn-black">
 
-							</tbody>
+        Continue Shopping
+
+    </a>
+
+</td>
+<%
+}
+%>
+
+							                    </tbody>
 
 						</table>
 
