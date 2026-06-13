@@ -5,6 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <base href="<%= request.getContextPath() %>/">
     <title>User Profile</title>
     <style>
         body {
@@ -94,8 +95,7 @@
             <p><strong>Password:</strong> <%= u.getPassword() %></p>
         </div>
         <div class="action-buttons">
-            <a href="editProfile">Edit Profile</a>
-            <a href="logout">Logout</a>
+            <a href="LogOutController">Logout</a>
         </div>
     </div>
 </body>
