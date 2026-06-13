@@ -121,10 +121,27 @@ if (products != null && cart != null && !products.isEmpty()) {
         <div align="right">
             <h4>Subtotal: ₹<%= grandTotal %></h4>
             <h4>Total: ₹<%= grandTotal %></h4>
+            
+            <%
+            // check whether login or not 
+            String username = (String) session.getAttribute("username");
+            if(username!=null)
+            {
+            %>
+            
 
             <a href="CheckoutController" class="btn btn-black btn-lg">
                 Proceed To Checkout
             </a>
+            <%}
+            else
+            {%>
+            <a href="login.jsp"
+           class="btn btn-black btn-lg">
+
+            Login To Checkout
+           </a>
+           <%} %>
         </div>
 
     </div>

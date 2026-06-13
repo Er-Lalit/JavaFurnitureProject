@@ -236,4 +236,34 @@
     <servlet-name>CheckoutController</servlet-name>
     <url-pattern>/CheckoutController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>initiateCheckout</display-name>
+    <servlet-name>initiateCheckout</servlet-name>
+    <servlet-class>control.initiateCheckout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>initiateCheckout</servlet-name>
+    <url-pattern>/initiateCheckout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>restoreStock</display-name>
+    <servlet-name>restoreStock</servlet-name>
+    <servlet-class>control.restoreStock</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>restoreStock</servlet-name>
+    <url-pattern>/restoreStock</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>confirmPayment</display-name>
+    <servlet-name>confirmPayment</servlet-name>
+    <servlet-class>control.confirmPayment</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>confirmPayment</servlet-name>
+    <url-pattern>/confirmPayment</url-pattern>
+  </servlet-mapping>
 </web-app>
