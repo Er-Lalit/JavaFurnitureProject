@@ -44,31 +44,30 @@ public class Shop_Product_Handle implements ShopePageProduct {
 
 	@Override
 	public void Add_Product(product p) throws Exception {
-		try {
-			
-		
-		Connection con=DbConnection.getConnection();
-		 
-		if(con==null) {
-			System.out.println("connection fail");
-			return ;
-		}
-		else {
-			PreparedStatement ps=con.prepareStatement("insert into product(product_id,product_name,product_price,product_image)values(?,?,?,?)");
-			ps.setInt(1, p.getProduct_Id());
-			ps.setString(2, p.getProduct_Name());
-			ps.setDouble(3,p.getProduct_productPrice());
-			ps.setString(4, p.getProduct_Image());
-			System.out.println("we are reach at the end ");
-			ps.executeUpdate();
-		}
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		
-	}
+	    try {
+	        Connection con = DbConnection.getConnection();
+	        if (con == null) {
+	            System.out.println("Connection fail");
+	            return;
+	        }
 
+	        // SQL now includes the 'product_qty' column
+	        String sql = "INSERT INTO product (product_id, product_name, product_price, product_image,qty) VALUES (?, ?, ?, ?, ?)";
+	        PreparedStatement ps = con.prepareStatement(sql);
+	        ps.setInt(1, p.getProduct_Id());
+	        ps.setString(2, p.getProduct_Name());
+	        ps.setDouble(3, p.getProduct_productPrice());
+	        ps.setString(4, p.getProduct_Image());
+	        ps.setInt(5, p.getProductQty());   // NEW: set the quantity
+
+	        System.out.println("Executing insert with quantity: " + p.getProductQty());
+	        ps.executeUpdate();
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        throw e;  // re-throw so the servlet can handle it
+	    }
+	}
 	@Override
 	public void editProduct(product p) throws Exception {
 		try {
@@ -79,12 +78,13 @@ public class Shop_Product_Handle implements ShopePageProduct {
 			}
 			else
 			{
-				PreparedStatement ps=con.prepareStatement("update product set product_name=?,product_price=?,product_image=? where product_id=?");
+				PreparedStatement ps=con.prepareStatement("update product set product_name=?,product_price=?,product_image=?,qty=? where product_id=?");
 				
 				ps.setString(1, p.getProduct_Name());
 				ps.setDouble(2,p.getProduct_productPrice());
 				ps.setString(3, p.getProduct_Image());
 				ps.setInt(4, p.getProduct_Id());
+				ps.setInt(5, p.getProductQty());
 				ps.executeUpdate();
 				ps.close();
 				con.close();

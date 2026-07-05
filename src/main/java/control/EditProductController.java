@@ -36,6 +36,8 @@ public class EditProductController extends HttpServlet {
 		double price=Double.parseDouble(request.getParameter("productPrice"));
 		p.setProduct_productPrice(price);
 		p.setProduct_Image(request.getParameter("productImage"));
+		int productQty = Integer.parseInt(request.getParameter("productQty"));
+		p.setProductQty(productQty);
 		Shop_Product_Handle sph=new Shop_Product_Handle ();
 		sph.editProduct(p);
 		}

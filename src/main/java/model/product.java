@@ -6,6 +6,7 @@ public class product {
 	private String product_Name;
     private String product_Image;
     private int product_cartCount;
+    private int productQty;
 	public int getProduct_cartCount() {
 		return product_cartCount;
 	}
@@ -35,5 +36,11 @@ public class product {
 	}
 	public void setProduct_Image(String product_Image) {
 		this.product_Image = product_Image;
+	}
+	public int getProductQty() {
+		return productQty;
+	}
+	public void setProductQty(int productQty) {
+		this.productQty = productQty;
 	}
 }
