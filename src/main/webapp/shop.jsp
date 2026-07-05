@@ -60,7 +60,8 @@
                 <div class="col-12 col-md-4 col-lg-3 mb-5">
                     <div class="product-item">
                         <!-- Product Image – context path -->
-<img src="images/<%= p.getProduct_Image() %>"                             class="img-fluid product-thumbnail"
+                        <img src="<%= request.getContextPath() %>/images/<%= p.getProduct_Image() %>"
+                             class="img-fluid product-thumbnail"
                              alt="<%= p.getProduct_Name() %>">
 
                         <h3 class="product-title"><%= p.getProduct_Name() %></h3>
