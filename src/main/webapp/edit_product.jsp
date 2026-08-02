@@ -1,47 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!-- edit_product.jsp - Edit product (fits inside admin panel) -->
+
+<%
+    // Debug - check if id is received
+    String id = request.getParameter("id");
+    System.out.println("🔍 edit_product.jsp: id = " + id);
+%>
 
 <div class="edit-product-wrapper">
     <h2><i class="fas fa-edit"></i> Edit Product</h2>
 
-    <!-- enctype is required if you want to upload a new image -->
     <form action="EditProductController" method="post" enctype="multipart/form-data" class="edit-product-form">
 
-        <!-- Hidden field to store the product ID (or you can use a visible field) -->
-        <input type="hidden" name="productId" value="${product.id}">
+        <!-- ✅ HIDDEN FIELD - CRITICAL! This sends productId to servlet -->
+        <input type="hidden" name="productId" value="<%= id %>">
 
-        <!-- If you want to allow changing the ID, use a text input; but typically ID is fixed -->
         <div class="form-group">
-            <label for="productId">Product ID</label>
-            <input type="text" name="productId" id="productId" value="${product.id}" readonly>
-            <!-- readonly or disabled to prevent change; adjust as needed -->
+            <label for="productIdDisplay">Product ID</label>
+            <input type="text" id="productIdDisplay" value="<%= id %>" readonly style="background: #f0f0f0; cursor: not-allowed;">
         </div>
 
         <div class="form-group">
             <label for="productName">Product Name</label>
-            <input type="text" name="productName" id="productName" value="${product.name}" required>
+            <input type="text" name="productName" id="productName" value="<%= request.getParameter("name") %>" required>
         </div>
 
         <div class="form-group">
             <label for="productPrice">Price (₹)</label>
-            <input type="number" name="productPrice" id="productPrice" value="${product.price}" step="0.01" required>
+            <input type="number" name="productPrice" id="productPrice" value="<%= request.getParameter("price") %>" step="0.01" required>
         </div>
 
-        <!-- NEW: Quantity field -->
         <div class="form-group">
             <label for="productQty">Quantity (Stock)</label>
-            <input type="number" name="productQty" id="productQty" value="${product.quantity}" min="0" required>
+            <input type="number" name="productQty" id="productQty" value="<%= request.getParameter("qty") %>" min="0" required>
         </div>
 
         <div class="form-group">
             <label for="productImage">Product Image</label>
             <div class="image-preview" id="imagePreview">
-                <!-- If an image exists, show it; otherwise show placeholder -->
-                <span>📷 Image Preview</span>
-                <img id="previewImg" src="${product.imageUrl}" alt="Product Image">
+                <%
+                    String image = request.getParameter("image");
+                    if (image != null && !image.isEmpty()) {
+                %>
+                    <img id="previewImg" src="<%= image %>" alt="Product Image" style="max-width: 100%; max-height: 220px; border-radius: 6px; object-fit: contain;">
+                <%
+                    } else {
+                %>
+                    <span>📷 No Image</span>
+                    <img id="previewImg" src="" alt="Product Image" style="display: none; max-width: 100%; max-height: 220px; border-radius: 6px; object-fit: contain;">
+                <%
+                    }
+                %>
             </div>
             <input type="file" name="productImage" id="productImage" accept="image/*">
-            <small style="color: #888; margin-top: 5px;">Leave empty to keep current image.</small>
+            <small style="color: #888; margin-top: 5px; display: block;">Leave empty to keep current image.</small>
         </div>
 
         <button type="submit"><i class="fas fa-save"></i> Update Product</button>
@@ -49,7 +60,6 @@
 </div>
 
 <style>
-    /* ====== Scoped styles for the edit form ====== */
     .edit-product-wrapper {
         max-width: 600px;
         margin: 0 auto;
@@ -68,7 +78,7 @@
         padding-bottom: 12px;
     }
     .edit-product-wrapper h2 i {
-        color: #f39c12; /* gold colour for edit */
+        color: #f39c12;
     }
 
     .edit-product-form .form-group {
@@ -95,6 +105,7 @@
         background: #fafbfc;
         transition: border 0.2s, box-shadow 0.2s;
         outline: none;
+        box-sizing: border-box;
     }
 
     .edit-product-form input:focus {
@@ -103,7 +114,11 @@
         background: #fff;
     }
 
-    /* Image preview – same as add product */
+    .edit-product-form input[readonly] {
+        background: #f0f0f0;
+        cursor: not-allowed;
+    }
+
     .image-preview {
         width: 100%;
         min-height: 180px;
@@ -124,18 +139,12 @@
         font-weight: 500;
     }
     .image-preview img {
-        max-width: 100%;
-        max-height: 220px;
-        display: ${empty product.imageUrl ? 'none' : 'block'};
         border-radius: 6px;
         object-fit: contain;
-    }
-    /* If image exists, hide the placeholder span */
-    .image-preview img[src] + span {
-        display: none;
+        max-width: 100%;
+        max-height: 220px;
     }
 
-    /* Submit button */
     .edit-product-form button[type="submit"] {
         width: 100%;
         padding: 14px;
@@ -157,7 +166,42 @@
         background: #d68910;
     }
 
-    /* ----- Responsive adjustments ----- */
+    /* Dark mode support */
+    body.dark-mode .edit-product-wrapper h2 {
+        color: #e2e8f0;
+        border-bottom-color: #475569;
+    }
+    
+    body.dark-mode .edit-product-form label {
+        color: #cbd5e1;
+    }
+    
+    body.dark-mode .edit-product-form input[type="text"],
+    body.dark-mode .edit-product-form input[type="number"],
+    body.dark-mode .edit-product-form input[type="file"] {
+        background: #0f172a;
+        border-color: #475569;
+        color: #e2e8f0;
+    }
+    
+    body.dark-mode .edit-product-form input:focus {
+        border-color: #f39c12;
+        background: #1e293b;
+    }
+    
+    body.dark-mode .edit-product-form input[readonly] {
+        background: #1e293b;
+    }
+    
+    body.dark-mode .image-preview {
+        background: #0f172a;
+        border-color: #475569;
+    }
+    
+    body.dark-mode .image-preview span {
+        color: #64748b;
+    }
+
     @media (max-width: 575.98px) {
         .edit-product-wrapper {
             padding: 15px 10px;
@@ -174,9 +218,6 @@
         .image-preview {
             min-height: 150px;
         }
-        .image-preview img {
-            max-height: 180px;
-        }
         .edit-product-form button[type="submit"] {
             padding: 12px;
             font-size: 1rem;
@@ -185,7 +226,6 @@
 </style>
 
 <script>
-    // Image preview update when a new file is selected
     document.addEventListener("DOMContentLoaded", function() {
         const fileInput = document.getElementById("productImage");
         const previewImg = document.getElementById("previewImg");
@@ -202,12 +242,6 @@
                         if (previewSpan) previewSpan.style.display = "none";
                     };
                     reader.readAsDataURL(file);
-                } else {
-                    // If no file selected, revert to existing image (if any)
-                    // You might want to keep the original image, but that requires passing the URL from server
-                    // For now, we'll just hide the preview and show placeholder if no image
-                    previewImg.style.display = "none";
-                    if (previewSpan) previewSpan.style.display = "block";
                 }
             });
         }

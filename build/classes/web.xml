@@ -266,4 +266,54 @@
     <servlet-name>confirmPayment</servlet-name>
     <url-pattern>/confirmPayment</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateQuantity</display-name>
+    <servlet-name>UpdateQuantity</servlet-name>
+    <servlet-class>control.UpdateQuantity</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateQuantity</servlet-name>
+    <url-pattern>/UpdateQuantity</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteProduct</display-name>
+    <servlet-name>DeleteProduct</servlet-name>
+    <servlet-class>control.DeleteProduct</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteProduct</servlet-name>
+    <url-pattern>/DeleteProduct</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ConfirmedOrdersServlet</display-name>
+    <servlet-name>ConfirmedOrdersServlet</servlet-name>
+    <servlet-class>control.ConfirmedOrdersServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConfirmedOrdersServlet</servlet-name>
+    <url-pattern>/ConfirmedOrdersServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CancelledOrdersServlet</display-name>
+    <servlet-name>CancelledOrdersServlet</servlet-name>
+    <servlet-class>control.CancelledOrdersServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CancelledOrdersServlet</servlet-name>
+    <url-pattern>/CancelledOrdersServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PendingOrdersServlet</display-name>
+    <servlet-name>PendingOrdersServlet</servlet-name>
+    <servlet-class>control.PendingOrdersServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PendingOrdersServlet</servlet-name>
+    <url-pattern>/PendingOrdersServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
