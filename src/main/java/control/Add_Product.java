@@ -30,11 +30,11 @@ public class Add_Product extends HttpServlet {
     
     @Override
     public void init() {
-        cloudinary = new Cloudinary(ObjectUtils.asMap(
-            "cloud_name", "ptowpo76",
-            "api_key", "497598556259855",
-            "api_secret", "LelzV1gbtgf-l8OK4sf4KG-UTg4"  // ← CHANGE THIS
-        ));
+    	  cloudinary = new Cloudinary(ObjectUtils.asMap(
+    		        "cloud_name", System.getenv("CLOUDINARY_CLOUD_NAME"),
+    		        "api_key", System.getenv("CLOUDINARY_API_KEY"),
+    		        "api_secret", System.getenv("CLOUDINARY_API_SECRET")
+    		    ));
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
