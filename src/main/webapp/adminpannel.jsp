@@ -1,4 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%
+    // Session validation - check if user is logged in
+    String username = (String) session.getAttribute("username");
+    
+    if (username == null || !username.equals("luck")) {
+        response.sendRedirect("index.jsp");
+        return;
+    }
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -526,8 +537,6 @@
     </style>
 </head>
 <body>
-    
-    
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -547,7 +556,7 @@
                     <li><a href="#" onclick="loadPage('privacy_settings.jsp')"><i class="fas fa-lock"></i> <span>Privacy Settings</span></a></li>
                 </ul>
             </li>
-            <li><a href="admin_logout.jsp"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
+            <li><a href="LogOutController"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
         </ul>
     </div>
 
@@ -563,7 +572,7 @@
             </div>
             <div class="user-profile">
                 <i class="fas fa-user-circle"></i>
-                <span>Admin</span>
+                <span><%= username %></span>  <!-- ✅ Shows actual username from session -->
             </div>
         </div>
 

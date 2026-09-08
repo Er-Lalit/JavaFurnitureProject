@@ -174,7 +174,9 @@
         <!-- Start Dynamic Column -->
         <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
           <a class="product-item" href="<%= request.getContextPath() %>/AddToCartController?pid=<%= p.getProduct_Id() %>">
-            <img src="<%= request.getContextPath() %>/images/<%= p.getProduct_Image() %>" class="img-fluid product-thumbnail" alt="<%= p.getProduct_Name() %>">
+            <img src="<%= p.getProduct_Image() %>"
+     class="img-fluid product-thumbnail"
+     alt="<%= p.getProduct_Name() %>">
             <h3 class="product-title"><%= p.getProduct_Name() %></h3>
             <strong class="product-price">₹ <%= p.getProduct_productPrice() %></strong>
             <span class="icon-cross">
