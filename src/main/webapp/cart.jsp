@@ -89,7 +89,7 @@ if (products != null && cart != null && !products.isEmpty()) {
 
 <tr>
     <td>
-        <img src="images/<%= p.getProduct_Image() %>" width="80">
+        <img src="<%= p.getProduct_Image() %>" width="80" alt="<%= p.getProduct_Name() %>">
     </td>
 
     <td><%= p.getProduct_Name() %></td>

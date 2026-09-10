@@ -85,7 +85,7 @@ public class Add_Product extends HttpServlet {
             Shop_Product_Handle sph = new Shop_Product_Handle();
             sph.Add_Product(p);
             
-            response.sendRedirect("shop.jsp");
+            response.sendRedirect("adminpannel.jsp?msg=added");
             
         } catch (Exception e) {
             e.printStackTrace();

@@ -164,37 +164,133 @@
         <!-- End Column 1 -->
 
         <!-- Dynamic Products – first 3 from the database -->
-        <%
-        if (products != null && !products.isEmpty()) {
-            int count = 0;
-            for (product p : products) {
-                if (count >= 3) break;
-                count++;
-        %>
-        <!-- Start Dynamic Column -->
-        <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-          <a class="product-item" href="<%= request.getContextPath() %>/AddToCartController?pid=<%= p.getProduct_Id() %>">
-            <img src="<%= p.getProduct_Image() %>"
-     class="img-fluid product-thumbnail"
-     alt="<%= p.getProduct_Name() %>">
-            <h3 class="product-title"><%= p.getProduct_Name() %></h3>
-            <strong class="product-price">₹ <%= p.getProduct_productPrice() %></strong>
-            <span class="icon-cross">
-              <img src="<%= request.getContextPath() %>/images/cross.svg" class="img-fluid" alt="Add to cart">
-            </span>
-          </a>
+
+<%
+if (products != null && !products.isEmpty()) {
+
+    int count = 0;
+
+    for (product p : products) {
+
+        if (count >= 3)
+            break;
+
+        count++;
+%>
+
+<!-- Start Dynamic Column -->
+
+<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+
+<%
+if (p.getProductQty() > 0) {
+%>
+
+    <!-- Product Available -->
+
+    <a class="product-item"
+       href="<%= request.getContextPath() %>/AddToCartController?pid=<%= p.getProduct_Id() %>">
+
+        <img src="<%= p.getProduct_Image() %>"
+             class="img-fluid product-thumbnail"
+             alt="<%= p.getProduct_Name() %>">
+
+        <h3 class="product-title">
+            <%= p.getProduct_Name() %>
+        </h3>
+
+        <strong class="product-price">
+            ₹ <%= p.getProduct_productPrice() %>
+        </strong>
+
+        <span class="icon-cross">
+
+            <img src="<%= request.getContextPath() %>/images/cross.svg"
+                 class="img-fluid"
+                 alt="Add to cart">
+
+        </span>
+
+    </a>
+
+<%
+} else {
+%>
+
+    <!-- Product Out Of Stock -->
+
+    <div class="product-item" style="cursor: default;">
+
+        <img src="<%= p.getProduct_Image() %>"
+             class="img-fluid product-thumbnail"
+             alt="<%= p.getProduct_Name() %>">
+
+        <h3 class="product-title">
+            <%= p.getProduct_Name() %>
+        </h3>
+
+        <strong class="product-price">
+            ₹ <%= p.getProduct_productPrice() %>
+        </strong>
+
+        <div style="
+            margin-top: 10px;
+            padding: 8px 12px;
+            border: 2px solid #dc3545;
+            border-radius: 8px;
+            color: #dc3545;
+            font-weight: bold;
+            text-align: center;
+            background-color: #fff;
+        ">
+            OUT OF STOCK
         </div>
-        <!-- End Dynamic Column -->
-        <%
-            }
-        } else {
-        %>
-        <div class="col-12 text-center">
-          <h4>No products available right now.</h4>
-        </div>
-        <%
-        }
-        %>
+
+        <button type="button"
+                disabled
+                style="
+                    margin-top: 10px;
+                    width: 45px;
+                    height: 45px;
+                    border: none;
+                    border-radius: 50%;
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                ">
+
+            <img src="<%= request.getContextPath() %>/images/cross.svg"
+                 class="img-fluid"
+                 alt="Out of stock">
+
+        </button>
+
+    </div>
+
+<%
+}
+%>
+
+</div>
+
+<!-- End Dynamic Column -->
+
+<%
+    }
+
+} else {
+%>
+
+<div class="col-12 text-center">
+
+    <h4>
+        No products available right now.
+    </h4>
+
+</div>
+
+<%
+}
+%>
 
       </div>
     </div>

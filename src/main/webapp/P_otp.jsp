@@ -99,23 +99,30 @@
 <body>
     <div class="otp-container">
         <form action="FP_OtpVerify" method="post">
-            <!-- Display error message dynamically -->
-        <% 
-            String message = request.getParameter("message");
-            if (message != null && !message.isEmpty()) {
-        %>
-            <p class="message"><%= message %></p>
-        <% 
-            } 
-        %>
-            <h2>Verify OTP</h2>
-            <div class="input-group">
-                <input type="hidden" name="mobile" value="${param.mobile}">
-                <label for="otp">Enter OTP</label>
-                <input type="text" id="otp" name="otp" placeholder="Enter the OTP" required>
-            </div>
-            <button type="submit">Verify OTP</button>
-        </form>
+
+    <%
+        String message = request.getParameter("message");
+        if (message != null && !message.isEmpty()) {
+    %>
+        <p class="message"><%= message %></p>
+    <%
+        }
+    %>
+
+    <h2>Verify OTP</h2>
+
+    <div class="input-group">
+        <label for="otp">Enter OTP</label>
+        <input type="text"
+               id="otp"
+               name="otp"
+               placeholder="Enter the OTP"
+               required>
+    </div>
+
+    <button type="submit">Verify OTP</button>
+
+</form>
     </div>
 </body>
 </html>

@@ -1,11 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
     <title>OTP Verification - Mobile</title>
+
     <style>
+
         body {
             margin: 0;
             padding: 0;
@@ -24,19 +33,7 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             width: 350px;
             max-width: 100%;
-            animation: fadeInUp 0.6s ease-out;
             margin: 20px;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         h2 {
@@ -63,7 +60,6 @@
             border-radius: 8px;
             font-size: 16px;
             box-sizing: border-box;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .input-group input:focus {
@@ -81,13 +77,22 @@
             cursor: pointer;
             font-size: 16px;
             width: 100%;
-            transition: background-color 0.3s ease;
         }
 
         button:hover {
             background-color: #00796b;
         }
-         footer a {
+
+        .resend-button {
+            background-color: #555;
+            margin-top: 10px;
+        }
+
+        .resend-button:hover {
+            background-color: #333;
+        }
+
+        footer a {
             color: #009688;
             text-decoration: none;
             font-size: 14px;
@@ -102,40 +107,125 @@
             text-align: center;
             margin-bottom: 15px;
         }
-    </style>
-</head>
-<body>
-<%
-    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // Prevents caching
-    response.setHeader("Pragma", "no-cache"); // HTTP 1.0
-    response.setHeader("Expires", "0"); // Prevents storing in proxy cache
 
-    HttpSession existingSession = request.getSession(false); // 🔹 Renamed to avoid duplicate declaration
-    if (existingSession == null || existingSession.getAttribute("Otp") == null) {
-        response.sendRedirect("login.jsp?message=Session Expired. Please Try Again.");
+    </style>
+
+</head>
+
+
+<body>
+
+<%
+
+    response.setHeader("Cache-Control",
+            "no-cache, no-store, must-revalidate");
+
+    response.setHeader("Pragma", "no-cache");
+
+    response.setHeader("Expires", "0");
+
+
+    HttpSession existingSession = request.getSession(false);
+
+
+    if (existingSession == null ||
+        existingSession.getAttribute("Otp") == null) {
+
+        response.sendRedirect(
+            "login.jsp?message=Session Expired. Please Try Again."
+        );
+
         return;
     }
+
 %>
-    <div class="otp-container">
-        <form action="OtpController" method="post">
-            <div class="message">
-                <%
-                if (request.getParameter("message") != null) {
-                    out.print(request.getParameter("message"));
-                }
-                %>
-            </div>
-            <h2>Verify OTP</h2>
-            <div class="input-group">
-                <input type="hidden" name="mobile" value="${param.mobile}">
-                <label for="otp">Enter OTP</label>
-                <input type="text" id="otp" name="otp" placeholder="Enter the OTP" required>
-            </div>
-            <button type="submit">Verify OTP</button>
-             <footer>
-                <p>Already have an account? <a href="login.jsp">Login</a></p>
-            </footer>
-        </form>
+
+
+<div class="otp-container">
+
+
+    <!-- MESSAGE -->
+
+    <div class="message">
+
+        <%
+
+            if (request.getParameter("message") != null) {
+
+                out.print(request.getParameter("message"));
+
+            }
+
+        %>
+
     </div>
+
+
+    <h2>Verify OTP</h2>
+
+
+    <!-- VERIFY OTP -->
+
+    <form action="OtpController" method="post">
+
+        <div class="input-group">
+
+            <label for="otp">
+                Enter OTP
+            </label>
+
+            <input
+                type="text"
+                id="otp"
+                name="otp"
+                placeholder="Enter the OTP"
+                required>
+
+        </div>
+
+
+        <button type="submit">
+            Verify OTP
+        </button>
+
+    </form>
+
+
+    <!-- RESEND OTP -->
+
+    <form action="OtpController" method="post">
+
+        <input
+            type="hidden"
+            name="action"
+            value="resend">
+
+        <button
+            type="submit"
+            class="resend-button">
+
+            Resend OTP
+
+        </button>
+
+    </form>
+
+
+    <footer>
+
+        <p>
+            Already have an account?
+
+            <a href="login.jsp">
+                Login
+            </a>
+        </p>
+
+    </footer>
+
+
+</div>
+
 </body>
+
 </html>

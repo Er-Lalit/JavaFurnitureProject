@@ -35,7 +35,7 @@ public class ResetPasswordController extends HttpServlet {
 			}
 
 			Connection con = DbConnection.getConnection();
-			PreparedStatement ps = con.prepareStatement("UPDATE user SET password=? WHERE contact=?");
+			PreparedStatement ps = con.prepareStatement("UPDATE users SET password=? WHERE contact=?");
 			ps.setString(1, N_Password);
 			ps.setString(2, number);
 			int result = ps.executeUpdate();

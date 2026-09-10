@@ -114,22 +114,29 @@ public class UserService implements UserRepository{
 
 	@Override
 	public boolean CheckUsername(User u) throws Exception {
-		boolean exist=false;
-		Connection con=DbConnection.getConnection();
-		if(con!=null) {
-			PreparedStatement ps=con.prepareStatement("select * from users where name=?");
-			ps.setString(1,u.getName());
-			ResultSet rs=ps.executeQuery();
-			if(rs.next()) {
-				exist= true;
-			}
-			else {
-				exist=false;
-			}
-			}
-		return exist;
-	}
 
+	    Connection con = DbConnection.getConnection();
+
+	    if (con == null) {
+	        return false;
+	    }
+
+	    PreparedStatement ps = con.prepareStatement(
+	        "SELECT * FROM users WHERE name=?"
+	    );
+
+	    ps.setString(1, u.getName());
+
+	    ResultSet rs = ps.executeQuery();
+
+	    boolean exist = rs.next();
+
+	    rs.close();
+	    ps.close();
+	    con.close();
+
+	    return exist;
+	}
 
 	
 	 public User ProfileDetail(User u) throws Exception {
@@ -158,24 +165,39 @@ public class UserService implements UserRepository{
 	        return u;
 	    }
 
-//	 public static final String ACCOUNT_SID = "";
-//	  public static   final String AUTH_TOKEN = "";
-//	  public static final String Twilio_Number=" ";
+
 	 
-	@Override
+	 @Override
 	 public String GenerateOtp(User u) throws Exception {
-//        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-       String otp = generateOtp();
-      System.out.println(u.getContact());
-        System.out.println("start working");
-//        Message message = Message.creator(
-//                new PhoneNumber(u.getContact()), // To phone number
-//                new PhoneNumber(Twilio_Number),  // From Twilio phone number
-//                "Your OTP code is: " + otp)
-//                .create();
-        System.out.println("OTP sent: " + otp);
-        return otp;
-    }
+
+	     String accountSid = System.getenv("TWILIO_ACCOUNT_SID");
+	     String authToken = System.getenv("TWILIO_AUTH_TOKEN");
+	     String twilioNumber = System.getenv("TWILIO_PHONE_NUMBER");
+	
+		 
+	     
+	     System.out.println("===== TWILIO CHECK =====");
+	     System.out.println("ACCOUNT SID = " + accountSid);
+	     System.out.println("AUTH TOKEN EXISTS = " + (authToken != null && !authToken.isEmpty()));
+	     System.out.println("PHONE NUMBER = " + twilioNumber);
+	     System.out.println("========================");
+
+	     Twilio.init(accountSid, authToken);
+
+	     String otp = generateOtp();
+
+	     Message message = Message.creator(
+	             new PhoneNumber(u.getContact()),
+	             new PhoneNumber(twilioNumber),
+	             "Your OTP code is: " + otp
+	     ).create();
+
+	     System.out.println("OTP sent successfully to: " + u.getContact());
+	     System.out.println("Twilio Message SID: " + message.getSid());
+
+	     return otp;
+	 }
+	 
 
     // Helper method to generate OTP
     private static String generateOtp() {

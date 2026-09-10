@@ -120,14 +120,10 @@
         }
     </style>
     <script>
-        function disableSubmitButton() {
-            const submitButton = document.querySelector('button[type="submit"]');
-            //const loadingMessage = document.getElementById('loadingMessage');
-
-            // Disable the submit button and show the loading message
-            submitButton.disabled = true;
-            loadingMessage.style.display = 'block';
-        }
+    function disableSubmitButton() {
+        const submitButton = document.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+    }
     </script>
      <script type="text/javascript">
         // Prevent back button navigation

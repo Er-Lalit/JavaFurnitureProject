@@ -22,20 +22,26 @@ public class UnblockUserController extends HttpServlet {
 
 	
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 try
-		 {
-			 UserService us=new UserService();
-			 User u=new User();
-			 u.setId(Integer.parseInt(request.getParameter("userId")));
-			 us.unblockUser(u);
-			 
-			 
-		 }
-		 catch(Exception e)
-		 {
-			 e.printStackTrace();
-		 }
-	}
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        try {
+            UserService us = new UserService();
+
+            User u = new User();
+            u.setId(Integer.parseInt(request.getParameter("userId")));
+
+            us.unblockUser(u);
+
+            // Success message
+            response.sendRedirect("adminpannel.jsp?msg=unblocked");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            // Error message
+            response.sendRedirect("adminpannel.jsp?msg=unblockerror");
+        }
+    }
 
 }

@@ -31,6 +31,7 @@ public class Shop_Product_Handle implements ShopePageProduct {
 	                p.setProduct_Name(rs.getString("product_name"));
 	                p.setProduct_productPrice(rs.getDouble("product_price"));
 	                p.setProduct_Image(rs.getString("product_image"));
+	                p.setProductQty(rs.getInt("qty"));
 
 	                list.add(p);
 	            }
@@ -44,28 +45,35 @@ public class Shop_Product_Handle implements ShopePageProduct {
 
 	@Override
 	public void Add_Product(product p) throws Exception {
+
 	    try {
+
 	        Connection con = DbConnection.getConnection();
+
 	        if (con == null) {
 	            System.out.println("Connection fail");
 	            return;
 	        }
 
-	        // SQL now includes the 'product_qty' column
-	        String sql = "INSERT INTO product (product_id, product_name, product_price, product_image,qty) VALUES (?, ?, ?, ?, ?)";
-	        PreparedStatement ps = con.prepareStatement(sql);
-	        ps.setInt(1, p.getProduct_Id());
-	        ps.setString(2, p.getProduct_Name());
-	        ps.setDouble(3, p.getProduct_productPrice());
-	        ps.setString(4, p.getProduct_Image());
-	        ps.setInt(5, p.getProductQty());   // NEW: set the quantity
+	        String sql = "INSERT INTO product (product_name, product_price, product_image, qty) VALUES (?, ?, ?, ?)";
 
-	        System.out.println("Executing insert with quantity: " + p.getProductQty());
+	        PreparedStatement ps = con.prepareStatement(sql);
+
+	        ps.setString(1, p.getProduct_Name());
+	        ps.setDouble(2, p.getProduct_productPrice());
+	        ps.setString(3, p.getProduct_Image());
+	        ps.setInt(4, p.getProductQty());
+
+	        System.out.println(
+	            "Executing insert with quantity: " + p.getProductQty()
+	        );
+
 	        ps.executeUpdate();
 
 	    } catch (Exception e) {
+
 	        e.printStackTrace();
-	        throw e;  // re-throw so the servlet can handle it
+	        throw e;
 	    }
 	}
 	@Override
@@ -151,6 +159,7 @@ public class Shop_Product_Handle implements ShopePageProduct {
 	            p.setProduct_Name(rs.getString("product_name"));
 	            p.setProduct_productPrice(rs.getDouble("product_price"));
 	            p.setProduct_Image(rs.getString("product_image"));
+	            p.setProductQty(rs.getInt("qty"));
 
 	            list.add(p);
 	        }
