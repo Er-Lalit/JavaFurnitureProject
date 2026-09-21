@@ -114,27 +114,28 @@ It also includes an **admin panel** for managing users and products, along with 
 
 <h3>🛍️ Shop</h3>
 <p align="center">
-  <img src="PUT_YOUR_IMAGE_LINK_HERE" alt="Furni Shop" width="900">
+  <img src="src/main/webapp/images/Screenshot 2026-09-21 131415.png" alt="Furni Shop" width="900">
 </p>
 
-<h3>🪑 Product Details</h3>
-<p align="center">
-  <img src="PUT_YOUR_IMAGE_LINK_HERE" alt="Furni Product Details" width="900">
-</p>
 
 <h3>🛒 Shopping Cart</h3>
 <p align="center">
-  <img src="PUT_YOUR_IMAGE_LINK_HERE" alt="Furni Shopping Cart" width="900">
+  <img src="src/main/webapp/images/Screenshot 2026-09-21 132534.png" alt="Furni Shopping Cart" width="900">
 </p>
 
 <h3>💳 Payment</h3>
 <p align="center">
-  <img src="PUT_YOUR_IMAGE_LINK_HERE" alt="Furni Payment" width="900">
+  <img src="src/main/webapp/images/Screenshot 2026-09-21 133026.png" alt="Furni Payment" width="900">
+</p>
+
+<h3>👨‍💼 Admin Panel</h3>
+<p align="center">
+  <img src="src/main/webapp/images/admin.png" alt="Furni Admin Panel" width="900">
 </p>
 
 <h3>📦 Orders</h3>
 <p align="center">
-  <img src="PUT_YOUR_IMAGE_LINK_HERE" alt="Furni Orders" width="900">
+  <img src="src/main/webapp/images/Screenshot 2026-09-21 135136.png" alt="Furni Orders" width="900">
 </p>
 
 # 📂 Project Structure
