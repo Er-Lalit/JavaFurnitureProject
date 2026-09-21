@@ -105,53 +105,49 @@ It also includes an **admin panel** for managing users and products, along with 
 
 ---
 
-# 📸 Screenshots
-
-> Add your actual project screenshots inside a `screenshots` folder and update the filenames below.
+# 📸 Application Preview
 
 ### 🏠 Home Page
 
 <p align="center">
-  <img src="screenshots/home.png" alt="Furni Home Page" width="850">
+  <img src="screenshots/home.png" alt="Furni Home Page" width="900">
 </p>
 
-### 🛍️ Products
+### 🛍️ Shop
 
 <p align="center">
-  <img src="screenshots/products.png" alt="Furni Products" width="850">
+  <img src="screenshots/shop.png" alt="Furni Shop" width="900">
 </p>
 
 ### 🪑 Product Details
 
 <p align="center">
-  <img src="screenshots/product-details.png" alt="Product Details" width="850">
+  <img src="screenshots/product-details.png" alt="Furni Product Details" width="900">
 </p>
 
 ### 🛒 Shopping Cart
 
 <p align="center">
-  <img src="screenshots/cart.png" alt="Shopping Cart" width="850">
+  <img src="screenshots/cart.png" alt="Furni Shopping Cart" width="900">
 </p>
 
 ### 💳 Payment
 
 <p align="center">
-  <img src="screenshots/payment.png" alt="Razorpay Payment" width="850">
+  <img src="screenshots/payment.png" alt="Furni Payment" width="900">
 </p>
 
 ### 📦 Orders
 
 <p align="center">
-  <img src="screenshots/orders.png" alt="Orders" width="850">
+  <img src="screenshots/orders.png" alt="Furni Orders" width="900">
 </p>
 
 ### 👨‍💼 Admin Panel
 
 <p align="center">
-  <img src="screenshots/admin.png" alt="Admin Panel" width="850">
+  <img src="screenshots/admin.png" alt="Furni Admin Panel" width="900">
 </p>
-
----
 
 # 📂 Project Structure
 
