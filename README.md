@@ -109,7 +109,7 @@ It also includes an **admin panel** for managing users and products, along with 
 
 <h3>🏠 Home Page</h3>
 <p align="center">
-  <img src="PUT_YOUR_IMAGE_LINK_HERE" alt="Furni Home Page" width="900">
+  <img src=""C:\Users\DELL\Pictures\Screenshots\Screenshot 2026-09-21 115207.png"" alt="Furni Home Page" width="900">
 </p>
 
 <h3>🛍️ Shop</h3>
