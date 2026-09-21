@@ -130,7 +130,7 @@ It also includes an **admin panel** for managing users and products, along with 
 
 <h3>👨‍💼 Admin Panel</h3>
 <p align="center">
-  <img src="src/main/webapp/images/admin.png" alt="Furni Admin Panel" width="900">
+  <img src="src/main/webapp/images/Screenshot 2026-09-21 140953.png" alt="Furni Admin Panel" width="900">
 </p>
 
 <h3>📦 Orders</h3>
