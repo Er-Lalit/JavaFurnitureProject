@@ -110,7 +110,7 @@ It also includes an **admin panel** for managing users and products, along with 
 ### 🏠 Home Page
 
 <p align="center">
-  <img src="<img width="802" height="620" alt="Screenshot 2026-09-21 115207" src="https://github.com/user-attachments/assets/6358da0a-cea6-40eb-b75c-aaa0813b2b6d" />
+  <img src="<img width="802" height="620" alt="Screenshot 2026-09-21 115207" src=""C:\Users\DELL\Pictures\Screenshots\Screenshot 2026-09-21 115207.png"" />
 " alt="Furni Home Page" width="900">
 </p>
 
