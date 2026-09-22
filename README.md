@@ -242,7 +242,7 @@ docker run -p 8080:8080 furni
 
 Java Developer | Full-Stack Web Development
 
-[LinkedIn]([https://www.linkedin.com/in/lalit-kumar](https://www.linkedin.com/in/lalit-kumar-762966301/))
+[LinkedIn](https://www.linkedin.com/in/lalit-kumar-762966301/)
 
 ---
 
