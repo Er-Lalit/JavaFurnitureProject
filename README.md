@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  <a href="https://javafurnitureproject.onrender.com/Furni/">🌐 Live Demo</a>
+  <a href="https://javafurnitureproject.onrender.com/Furni/index.jsp">🌐 Live Demo</a>
   &nbsp; • &nbsp;
   <a href="https://github.com/Er-Lalit/JavaFurnitureProject">💻 GitHub Repository</a>
 </p>
@@ -230,7 +230,7 @@ docker run -p 8080:8080 furni
 
 # 🌐 Live Project
 
-### 🚀 [Open Furni Live](https://javafurnitureproject.onrender.com/Furni/)
+### 🚀 [Open Furni Live](https://javafurnitureproject.onrender.com/Furni/index.jsp)
 
 ### 💻 [View Source Code on GitHub](https://github.com/Er-Lalit/JavaFurnitureProject)
 
